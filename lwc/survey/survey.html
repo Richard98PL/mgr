@@ -1,0 +1,14 @@
+<template>
+  <template if:false={surveyCompleted}>
+    <c-current-question get-question-from-survey={question} counter={counter} howmany = {howmany} is-last-question={isLastQuestion} ongotonextquestion={goToNextQuestion} onsendanswers={sendAnswers}></c-current-question>
+   </template>
+   <template if:true={surveyCompleted}>
+    <div class="thank-you-content">
+        <lightning-card>
+        <p style = "size: 25px;"> Dziękuję za wypełnienie ankiety!</p>
+        <img alt="check-mark" src={checkMark} width="50" height="50">
+        <p>Twoja odpowiedź została zapisana</p>
+    </lightning-card>
+    </div>
+  </template>
+</template>

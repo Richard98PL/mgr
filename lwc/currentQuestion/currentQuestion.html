@@ -1,0 +1,58 @@
+<template >
+    <div class="container slds-card">
+        <lightning-card>
+        <h2>Pytanie {counter}/{howmany}</h2>
+        <div class="questionContainer">
+            <p class="questionTxt">{getQuestionFromSurvey.Question__c}</p>
+
+        <template if:true={isInteractiveBoard}>
+            <button onclick={showInfo} class="slds-button readMore">Dowiedz się więcej</button>
+            <template if:true={isShowInfo}>
+                <p>{additionalInfo}</p>
+            </template>
+        </template>
+        </div>
+
+        <div class="answer-container">
+            <template if:true={EducationQuestion}>
+                <lightning-combobox
+            name="progress"
+            label="Wykształcenie"
+            value={value}
+            placeholder="Wybierz opcję"
+            options={optionsEdu}
+            onchange={handleChange} ></lightning-combobox>
+            </template>
+            <template if:true={genderQuestion}>
+                <lightning-radio-group name="Odpowiedź"
+                              label="Odpowiedź: "
+                              options={optionsGen}
+                              value={value}
+                              onchange={handleChange}>
+            </lightning-radio-group>
+            </template>
+            <template if:true={ageQuestion}>
+                <lightning-input type="number" min="10" max="100" name="input1" label="Wprowadź liczbę" value={value} onchange={handleAgeChange}></lightning-input>
+            </template>
+            <template if:false={isUserData}>
+            <lightning-radio-group name="Odpowiedź"
+                              label="Odpowiedź: "
+                              options={options}
+                              value={value}
+                              onchange={handleChange}>
+            </lightning-radio-group>
+        </template>
+        </div>
+        <div style = "padding: 15px;">
+            <template if:false={isLastQuestion}>
+                <lightning-button variant="brand" label="Dalej" title="Primary action" onclick={nextClick} disabled={disableButton} class="slds-m-right_x-small nextBtn"></lightning-button>
+            </template>
+        </div>
+        <div style = "padding: 15px;">
+            <template if:true={isLastQuestion}>
+                <button class="slds-button slds-button_success finishBtn" onclick={finishClick} disabled={disableButton}>Zakończ</button>
+            </template>
+        </div>
+    </lightning-card>
+    </div>
+</template>
